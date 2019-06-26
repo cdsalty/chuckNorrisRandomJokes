@@ -19,3 +19,6 @@ http://www.icndb.com/api/
   - xhr.onLoad
   - xhr.send()
     - - follow-up the end of the function with e.preventDefault()
+
+
+    * call our ajax request by calling xhr = XMLHttpReqest()
