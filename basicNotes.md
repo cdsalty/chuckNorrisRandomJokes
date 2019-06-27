@@ -38,5 +38,30 @@ http://www.icndb.com/api/
                   console.log(response);    ------> Returns a JSON.string. Need to call on parse (vs. stringify)        - WHY? Because we need to turn it into an object so we can call on                     it, loop through it, etc.
                   }
                 }   
+-------------------------------------------------------------------------------------------------------
+THE BASICS SETUP TO RETRIEVE DATA IN CONSOLE:
 
-        
+
+document.querySelector('.get-jokes').addEventListener('click', getJokes);
+
+function getJokes(e){
+  const number = document.querySelector('input[type="number"]').value; 
+  
+  const xhr = new XMLHttpRequest(); 
+
+  xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
+
+  xhr.onload = function () {
+    if(this.status === 200){
+      const response = JSON.parse(this.responseText); 
+      console.log(response);
+    }
+  }
+
+  xhr.send();
+
+  e.preventDefault();
+}
+-------------------------------------------------------------------------------------------------------
+
+Now, to display the data being returned: 

@@ -11,10 +11,24 @@ function getJokes(e){
   xhr.open('GET', `http://api.icndb.com/jokes/random/${number}`, true);
 
   xhr.onload = function () {
-    if(this.status === 200){
+    if(this.status === 200) {
       // const response = this.responseText; // -----> returns a JSON string. to fix, we parse this instead
       const response = JSON.parse(this.responseText); // this will return an object from the json string originally
-      console.log(response);
+
+      let output = '';
+
+      if(response.type === 'success'){ // if success, what to do? Loop through each iteration(joke), inside the output. We want to append to it. Use forEach()
+        // sometimes you can go with response.forEach but since each API works differently. In our console, you see what we need to loop through is atactually the key, 'value'
+        response.value.forEach(function(joke){ // forEach joke
+          output +=  `<li>${joke.joke}</li>`; // under the index, it has catagories, id, joke. We need to joke so I had to do joke.joke
+        });
+      } else {  
+            // += to append; not delete and add but to take what's there and append to it.
+        output += `<li>opps... something might have went wrong</li>`;
+      }
+
+      // we need to now insert the html that is outputted: It will be output on the html with the class of jokes
+      document.querySelector('.jokes').innerHTML = output;
     }
   }
 
