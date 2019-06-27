@@ -21,4 +21,22 @@ http://www.icndb.com/api/
     - - follow-up the end of the function with e.preventDefault()
 
 
-    * call our ajax request by calling xhr = XMLHttpReqest()
+    * call our ajax request by calling xhr = XMLHttpReqest(); (** CREATES THE OBJECT **)
+
+    * xhr.open('method type', address/destination, true) true for asyncronous
+
+    Next, what do you want to do when you get this data?
+      - this will come onLoad... 
+        - xhr.onload = function() {
+            if(this.status === 200) { // this is referring to the xhr object
+              // define variable and set it equal to this.responseText.
+                  - review: responseText
+              
+              Code: xhr.onload = function () {
+                if(this.status === 200){
+                  const response = this.responseText;
+                  console.log(response);    ------> Returns a JSON.string. Need to call on parse (vs. stringify)        - WHY? Because we need to turn it into an object so we can call on                     it, loop through it, etc.
+                  }
+                }   
+
+        
